@@ -204,6 +204,7 @@ export default class SiderMenu extends PureComponent {
     }
     return (
       <Sider
+        style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
         trigger={null}
         collapsible
         collapsed={collapsed}

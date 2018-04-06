@@ -79,17 +79,20 @@ const query = {
 };
 
 let isMobile;
+
 enquireScreen(b => {
   isMobile = b;
 });
 
 class BasicLayout extends React.PureComponent {
+
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   };
   state = {
     isMobile,
+    leftWidth:256,
   };
   getChildContext() {
     const { location, routerData } = this.props;
@@ -138,6 +141,18 @@ class BasicLayout extends React.PureComponent {
     return redirect;
   };
   handleMenuCollapse = collapsed => {
+    if (collapsed){
+      this.setState({
+        leftWidth:80,
+      });
+    }else{
+
+        this.setState({
+          leftWidth:256,
+        });
+
+    }
+
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
@@ -182,6 +197,7 @@ class BasicLayout extends React.PureComponent {
     const layout = (
       <Layout>
         <SiderMenu
+
           logo={logo}
           // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
           // If you do not have the Authorized parameter
@@ -193,7 +209,7 @@ class BasicLayout extends React.PureComponent {
           isMobile={this.state.isMobile}
           onCollapse={this.handleMenuCollapse}
         />
-        <Layout>
+        <Layout style={{ marginLeft: this.state.leftWidth}}>
           <Header style={{ padding: 0 }}>
             <GlobalHeader
               logo={logo}

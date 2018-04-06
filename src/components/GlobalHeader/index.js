@@ -85,7 +85,7 @@ export default class GlobalHeader extends PureComponent {
     );
     const noticeData = this.getNoticeData();
     return (
-      <div className={styles.header}>
+      <div className={styles.header} >
         {isMobile && [
           <Link to="/" className={styles.logo} key="logo">
             <img src={logo} alt="logo" width="32" />
